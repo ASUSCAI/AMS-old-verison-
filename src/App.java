@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.python.util.PythonInterpreter;
-
 public class App {
 
     private static int count = 3;
@@ -19,7 +17,6 @@ public class App {
         } catch (IOException | InterruptedException | SQLException e) {
             e.printStackTrace();
         }
-        jythonTest();
     }
 
     private static void cardReadTest(Statement statement) throws IOException, InterruptedException, SQLException {
@@ -28,21 +25,11 @@ public class App {
         while (true) {
             if ((line = in.readLine()) != null && line.length() > 0) {
                 System.out.println(line.trim());
-                statement.executeUpdate("INSERT INTO Students VALUES(" + count++ + ", 'John Doe')");
+                statement.executeUpdate("INSERT INTO Students VALUES(" + count++ + ", '" + line + "')");
                 // TODO: pull student name and other data from a mock PeopleSoft database
             } else {
                 Thread.sleep(2000); // check file every 2 sec
             }
-        }
-    }
-
-    private static void jythonTest() {
-        try (PythonInterpreter pyInterp = new PythonInterpreter()) {
-            // pyInterp.exec("from canvasapi import Canvas");
-            pyInterp.exec("print('Hello Python World!')");
-            // TODO: it may be fine to just write this as a separate python script
-            // invoking a shell command from Java is trivial, full Python integration may not be necessary
-            // or we could just invoke it manually
         }
     }
 
@@ -54,8 +41,8 @@ public class App {
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30); // set timeout to 30 sec.
 
-            statement.executeUpdate("DROP TABLE IF EXISTS Students");
-            statement.executeUpdate("CREATE TABLE Students (id INTEGER, name TEXT)");
+            statement.executeUpdate("DROP TABLE IF EXISTS KeycardScans");
+            statement.executeUpdate("CREATE TABLE KeycardScans (id INTEGER, name TEXT)");
             statement.executeUpdate("INSERT INTO Students VALUES(1, 'John Doe')");
             statement.executeUpdate("INSERT INTO Students VALUES(2, 'Bob Good')");
             ResultSet rs = statement.executeQuery("SELECT * FROM Students");
