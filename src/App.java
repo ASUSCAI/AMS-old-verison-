@@ -40,6 +40,9 @@ public class App {
         try (PythonInterpreter pyInterp = new PythonInterpreter()) {
             // pyInterp.exec("from canvasapi import Canvas");
             pyInterp.exec("print('Hello Python World!')");
+            // TODO: it may be fine to just write this as a separate python script
+            // invoking a shell command from Java is trivial, full Python integration may not be necessary
+            // or we could just invoke it manually
         }
     }
 
