@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,8 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         Statement statement = sqlInit();
-        reader = new CardReader(statement);
-        try (RandomAccessFile in = new RandomAccessFile("ids.txt", "r")) {
+        reader = new CardReader(statement, "WXLR301");
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             reader.startMonitor(in);
         } catch (IOException|SQLException|InterruptedException e) {
             e.printStackTrace();
@@ -32,7 +34,7 @@ public class Main {
 
             // * just for testing, recreate table every time
             statement.executeUpdate("DROP TABLE IF EXISTS KeycardScans");
-            statement.executeUpdate("CREATE TABLE KeycardScans (time INTEGER, room TEXT, sid INTEGER, in INTEGER)");
+            statement.executeUpdate("CREATE TABLE KeycardScans (time INTEGER, room TEXT, sid INTEGER, inOut INTEGER)");
             // ResultSet rs = statement.executeQuery("SELECT * FROM KeycardScans");
             // while (rs.next()) {
             //     // read the result set
@@ -40,6 +42,7 @@ public class Main {
             //     System.out.println("id: " + rs.getInt("id"));
             // }
             return statement;
+            // return connection;
         } catch (SQLException e) {
             // if the error message is "out of memory",
             // it probably means no database file is found
