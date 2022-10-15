@@ -3,7 +3,8 @@ Devils Invent - Fall '22
 
 ## Getting Started
 
-Welcome to NARD's Attendance System project. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Welcome to NARD's Attendance System project. To simplify the onboarding process I've decided not to use any build tools for this project.
+Dependencies will be included as part of the content of this repository in the /lib/ directory.
 
 ## Folder Structure
 
