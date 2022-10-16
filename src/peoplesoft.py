@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("D:\Informatics_Practices\IP_Activity\peoplesoft.csv", index_col=['canvas'])
+df = pd.read_csv("peoplesoft.csv", index_col=['canvas'])
 
 def getCanvasNums():
     y = df.index.tolist()
