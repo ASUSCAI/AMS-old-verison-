@@ -2,3 +2,10 @@
 /.vscode/*
 sample.db
 /src/__pycache__/
+*.png
+*.ai
+*.eps
+*.jpg
+*.pdf
+*.zip
+*.pptx

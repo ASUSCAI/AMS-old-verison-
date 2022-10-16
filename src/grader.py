@@ -15,11 +15,12 @@ cursor = conn.cursor()
 API_URL = "https://canvas.instructure.com/"
 
 # Canvas API Key
-API_KEY = "7~WzcUAwH59JqOHTgALQ7nrrUrlQVwcvXKcrhhyyUWPyYdB1l04l7TiBK0cGkH8JpT"
+
+API_KEY = "7~R03Jk3mMKnDqnnSR86mvkwRZ40g5O9UootMkI3QlcLAFkhjbp2S3l4L5GgLHqxj3"
 
 # Initializing canvas object
 canvas = Canvas(API_URL, API_KEY)
-TOLERANCE = 300
+TOLERANCE = 3600
 
 todayDate = date.datetime.now().date()
 
@@ -93,17 +94,19 @@ def grade():
                 # studentList.remove(student)
             
             print(studentList)
-            zoomGrade(course, assignment, start, end)
+            zoomGrade(course, assignment, unixStartTime, unixEndTime)
     
 def zoomGrade(course, assignment, start, end):
     studentList = course.get_users(enrollment_type = ['student'])
     for student in studentList:
+        sid = int(student.name)
+        if not zoom.exists(sid): continue
+        print("grading", student.name)
         sub = assignment.get_submission(student.id)
         if sub.score == 0:
-            if zoom.startTime(student.name) > start - TOLERANCE and zoom.startTime < start + TOLERANCE:
-                if zoom.endTime(student.name) > end - TOLERANCE and zoom.endTime < end + TOLERANCE:
+            if zoom.startTime(sid) > start - TOLERANCE and zoom.startTime(sid) < start + TOLERANCE:
+                if zoom.endTime(sid) > end - TOLERANCE and zoom.endTime(sid) < end + TOLERANCE:
                     sub.edit(submission = {'posted_grade' : 1})
-            pass
 
 
 grade()
