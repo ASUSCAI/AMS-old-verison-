@@ -5,6 +5,7 @@ from canvasapi import Canvas
 import datetime as date
 import sqlite3
 import time
+import zoom
 
 conn = sqlite3.connect("sample.db")
 cursor = conn.cursor()
@@ -92,13 +93,16 @@ def grade():
                 # studentList.remove(student)
             
             print(studentList)
-            zoomGrade(course, assignment)
+            zoomGrade(course, assignment, start, end)
     
-def zoomGrade(course, assignment):
+def zoomGrade(course, assignment, start, end):
     studentList = course.get_users(enrollment_type = ['student'])
     for student in studentList:
         sub = assignment.get_submission(student.id)
-        if sub.score != 0:
+        if sub.score == 0:
+            if zoom.startTime(student.name) > start - TOLERANCE and zoom.startTime < start + TOLERANCE:
+                if zoom.endTime(student.name) > end - TOLERANCE and zoom.endTime < end + TOLERANCE:
+                    sub.edit(submission = {'posted_grade' : 1})
             pass
 
 
