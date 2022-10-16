@@ -12,7 +12,7 @@ def exists(studentID):
     y = merged_data.index.tolist()
     for id in y:
         if studentID == id:
-            counter += 1
+            counter = 1
 
     if counter == 1:
         return True
