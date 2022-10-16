@@ -13,14 +13,16 @@ def getId():
 
 def startTime(studentID):
     y = str(merged_data.at[studentID, 'Join Time'])
-    x = str(date.datetime.now().date()) + "T" + y[31:36] + ":00"
+    x = str(date.datetime.now().date()) + "T" + y[11:16] + ":00"
     z = date.datetime.fromisoformat(x)
     unixStartTime = int(time.mktime(z.timetuple()))
     return unixStartTime
 
+
+
 def endTime(studentID):
     y = str(merged_data.at[studentID, 'Leave Time'])
-    x = str(date.datetime.now().date()) + "T" + y[31:36] + ":00"
+    x = str(date.datetime.now().date()) + "T" + y[11:16] + ":00"
     z = date.datetime.fromisoformat(x)
     unixEndTime = int(time.mktime(z.timetuple()))
     return unixEndTime
