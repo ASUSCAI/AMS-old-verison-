@@ -26,3 +26,17 @@ def endTime(studentID):
     z = date.datetime.fromisoformat(x)
     unixEndTime = int(time.mktime(z.timetuple()))
     return unixEndTime
+
+
+def exists(studentID):
+    counter = 0
+    y = merged_data.index.tolist()
+    for id in y:
+        if(studentID == id):
+            counter += 1
+
+    if counter == 1:
+        return True
+
+    else:
+        return False
