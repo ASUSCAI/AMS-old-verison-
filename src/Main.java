@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         Statement statement = sqlInit();
-        reader = new CardReader(statement, "WXLR301");
+        reader = new CardReader(statement, "ART220");
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             reader.startMonitor(in);
         } catch (IOException|SQLException|InterruptedException e) {
@@ -33,8 +33,8 @@ public class Main {
             statement.setQueryTimeout(30); // set timeout to 30 sec.
 
             // * just for testing, recreate table every time
-            statement.executeUpdate("DROP TABLE IF EXISTS KeycardScans");
-            statement.executeUpdate("CREATE TABLE KeycardScans (time INTEGER, room TEXT, sid INTEGER, inOut INTEGER)");
+            // statement.executeUpdate("DROP TABLE IF EXISTS KeycardScans");
+            // statement.executeUpdate("CREATE TABLE KeycardScans (time INTEGER, room TEXT, sid INTEGER, inOut INTEGER)");
             // ResultSet rs = statement.executeQuery("SELECT * FROM KeycardScans");
             // while (rs.next()) {
             //     // read the result set
