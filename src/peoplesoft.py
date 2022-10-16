@@ -2,8 +2,6 @@ import pandas as pd
 
 df = pd.read_csv("D:\Informatics_Practices\IP_Activity\peoplesoft.csv", index_col=['canvas'])
 
-print(df)
-
 def getCanvasNums():
     y = df.index.tolist()
     return y
@@ -44,5 +42,5 @@ def getDays(x):
             lnn[i] = 5
 
         if lnn[i] == 'Sun':
-                lnn[i] = 6
+            lnn[i] = 6
     return lnn
