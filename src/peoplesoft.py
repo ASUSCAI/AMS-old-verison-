@@ -43,4 +43,4 @@ def getDays(x):
 
         if lnn[i] == 'Sun':
             lnn[i] = 6
-    return lnn
+        return lnn
