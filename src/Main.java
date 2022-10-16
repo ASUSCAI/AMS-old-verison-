@@ -34,7 +34,7 @@ public class Main {
 
             // * just for testing, recreate table every time
             // statement.executeUpdate("DROP TABLE IF EXISTS KeycardScans");
-            // statement.executeUpdate("CREATE TABLE KeycardScans (time INTEGER, room TEXT, sid INTEGER, inOut INTEGER)");
+            statement.executeUpdate("CREATE TABLE KeycardScans (time INTEGER, room TEXT, sid INTEGER, inOut INTEGER)");
             // ResultSet rs = statement.executeQuery("SELECT * FROM KeycardScans");
             // while (rs.next()) {
             //     // read the result set

@@ -18,12 +18,13 @@ API_KEY = "7~WzcUAwH59JqOHTgALQ7nrrUrlQVwcvXKcrhhyyUWPyYdB1l04l7TiBK0cGkH8JpT"
 
 # Initializing canvas object
 canvas = Canvas(API_URL, API_KEY)
+TOLERANCE = 300
 
 todayDate = date.datetime.now().date()
 
 currentMonth = date.datetime.now().month
 currentDay = date.datetime.now().day
-current = ['Attendance for ', currentMonth,"/",currentDay]
+current = 'Attendance for ' + str(currentMonth) + "/" + str(currentDay)
 
 def grade():
     # start, end = peoplesoft.getTimes(57271)
@@ -31,17 +32,19 @@ def grade():
 
     courseNums  = peoplesoft.getCanvasNums()
     for courseNum in courseNums:
-        if weekday() in peoplesoft.getDays(courseNum):
+        # if weekday() in peoplesoft.getDays(courseNum):
             start, end = peoplesoft.getTimes(courseNum)
 
-            x = [todayDate, start]
-            y = [todayDate, end]
+            # x = [todayDate, 'T', start]
+            # y = [todayDate, 'T', end]
+            x = str(todayDate) + 'T' + str(start)
+            y = str(todayDate) + 'T' + str(end)
 
             startTime = date.datetime.fromisoformat(x)
             endTime = date.datetime.fromisoformat(y)
 
-            unixStartTime = time.mktime(startTime.timetuple())
-            unixEndTime = time.mktime(endTime.timetuple())
+            unixStartTime = int(time.mktime(startTime.timetuple()))
+            unixEndTime = int(time.mktime(endTime.timetuple()))
 
             course = canvas.get_course(courseNum)
 
@@ -50,35 +53,53 @@ def grade():
                 'submission_types' : 'none',
                 'notify_of_update' : False,
                 'points_possible' : 1,
-                'assignment_group_id' : 10,
+                'assignment_group_id' : 1,
                 'published' : True
             })
 
-            studentList = courseNum.get_users(enrollment_type = ['student'])
+            studentList = course.get_users(enrollment_type = ['student'])
             for student in studentList:
                 command = '''SELECT * FROM KeycardScans WHERE room = ? AND sid = ? '''
                 cursor.execute(command, (peoplesoft.getRoom(courseNum), int(student.name)))
-                entries= cursor.fetchall()
+                
+                entries = cursor.fetchall()
+                # print(entries)
+
                 
                 passed = False
 
-                i = 0
+                if (len(entries) != 0):
+                    i = 0
 
-                while(i < len(entries)):
-                    if entries[i][3] == 1 :
-                        if entries[i][0] > unixStartTime - 900 and entries[i][0] < unixStartTime + 900 :
-                            i += 1
-                            if entries[i][0] > unixEndTime - 900 and entries[i][0] < unixEndTime + 900 :
-                                passed = True
-                
+                    while(i < len(entries)):
+                        print(entries[i][3])
+                        if entries[i][3] == 1:
+                            print('Start: ', unixStartTime, entries[i][0])
+                            if entries[i][0] > unixStartTime - TOLERANCE and entries[i][0] < unixStartTime + TOLERANCE:
+                                i += 1
+                                if i == len(entries): continue
+                                if entries[i][0] > unixEndTime - TOLERANCE and entries[i][0] < unixEndTime + TOLERANCE:
+                                    print('End: ', unixEndTime, entries[i][0])
+                                    passed = True
+                        i += 1
                     
                 sub1 = assignment.get_submission(student.id)
 
-                if passed :
+                if passed:
                     sub1.edit(submission = {'posted_grade' : 1})
                 else:
                     sub1.edit(submission = {'posted_grade' : 0})
-
+                # studentList.remove(student)
+            
+            print(studentList)
+            zoomGrade(course, assignment)
+    
+def zoomGrade(course, assignment):
+    studentList = course.get_users(enrollment_type = ['student'])
+    for student in studentList:
+        sub = assignment.get_submission(student.id)
+        if sub.score != 0:
+            pass
 
 
 grade()
