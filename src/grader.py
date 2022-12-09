@@ -16,7 +16,7 @@ API_URL = "https://canvas.instructure.com/"
 
 # Canvas API Key
 
-API_KEY = "7~R03Jk3mMKnDqnnSR86mvkwRZ40g5O9UootMkI3QlcLAFkhjbp2S3l4L5GgLHqxj3"
+API_KEY = "API_KEY"
 
 # Initializing canvas object
 canvas = Canvas(API_URL, API_KEY)
