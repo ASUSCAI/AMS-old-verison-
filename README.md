@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/raoanmol/NARDS/main/ams-logo-small.jpg?token=GHSAT0AAAAAABWZIXLCK6SGSZXBZLXVTQSQY4TRFTA)
+![logo](https://raw.githubusercontent.com/raoanmol/NARDS/main/ams-logo-small.jpg)
 # Attendance Management System - Working Prototype
 The Attendance Management System (AMS) is an automated software solution to the issue of time-consuming manual attendance recording methods prevalent throughout many introductory STEM courses at Arizona State University (ASU).
 
@@ -27,7 +27,7 @@ Meanwhile, the compiled output files will be generated in the `bin` folder.
 
 ## Dependencies
 
-[SQLite JDBC Driver](https://github.com/xerial/sqlite-jdbc)
-[CanvasAPI](https://github.com/ucfopen/canvasapi)
+- [SQLite JDBC Driver](https://github.com/xerial/sqlite-jdbc)
+- [CanvasAPI](https://github.com/ucfopen/canvasapi)
 
 &copy; 2022, PNARDS. All rights reserved.
