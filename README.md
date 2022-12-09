@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/raoanmol/NARDS/main/ams-logo-small.jpg)
+![logo](https://raw.githubusercontent.com/raoanmol/NARDS/main/ams-logo-small.jpg?token=GHSAT0AAAAAABWZIXLCQGAVYX7FOIOJUBBCY4TSMCQ)
 # Attendance Management System - Working Prototype
 The Attendance Management System (AMS) is an automated software solution to the issue of time-consuming manual attendance recording methods prevalent throughout many introductory STEM courses at Arizona State University (ASU).
 
