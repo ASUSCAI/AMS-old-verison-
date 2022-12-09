@@ -30,4 +30,12 @@ Meanwhile, the compiled output files will be generated in the `bin` folder.
 - [SQLite JDBC Driver](https://github.com/xerial/sqlite-jdbc)
 - [CanvasAPI](https://github.com/ucfopen/canvasapi)
 
+## Credits
+- Anmol Rao - Systems Design, Programming (Zoom integration)
+- Deep Goyal - Systems Design, Additional Programming
+- Nishant Dhongadi - Conceptual Design, Documentation
+- Pranav Aratikatla - Conceptual Design, Programming (Canvas integration)
+- Ryan Woo - Systems Design, Programming (ISAAC integration, Canvas Integration)
+- Sahil Sinha - Conceptual Design, Documentation
+
 &copy; 2022, PNARDS. All rights reserved.
